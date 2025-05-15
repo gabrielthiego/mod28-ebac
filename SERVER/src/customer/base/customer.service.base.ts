@@ -15,21 +15,25 @@ export class CustomerServiceBase {
   ): Promise<Customer[]> {
     return this.prisma.customer.findMany(args);
   }
+
   async findOne<T extends Prisma.CustomerFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.CustomerFindUniqueArgs>
   ): Promise<Customer | null> {
-    return this.prisma.customer.findUnique(args);
+    return await this.prisma.customer.findUnique(args);
   }
+
   async create<T extends Prisma.CustomerCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.CustomerCreateArgs>
   ): Promise<Customer> {
     return this.prisma.customer.create<T>(args);
   }
+
   async update<T extends Prisma.CustomerUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.CustomerUpdateArgs>
   ): Promise<Customer> {
     return this.prisma.customer.update<T>(args);
   }
+
   async delete<T extends Prisma.CustomerDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.CustomerDeleteArgs>
   ): Promise<Customer> {
@@ -40,7 +44,7 @@ export class CustomerServiceBase {
     parentId: string,
     args: Prisma.OrderFindManyArgs
   ): Promise<Order[] | null> {
-    return this.prisma.customer
+    return await this.prisma.customer
       .findUnique({
         where: { id: parentId },
       })
@@ -48,7 +52,7 @@ export class CustomerServiceBase {
   }
 
   async getAddress(parentId: string): Promise<Address | null> {
-    return this.prisma.customer
+    return await this.prisma.customer
       .findUnique({
         where: { id: parentId },
       })

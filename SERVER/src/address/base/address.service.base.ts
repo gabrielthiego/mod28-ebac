@@ -15,21 +15,25 @@ export class AddressServiceBase {
   ): Promise<Address[]> {
     return this.prisma.address.findMany(args);
   }
+
   async findOne<T extends Prisma.AddressFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressFindUniqueArgs>
   ): Promise<Address | null> {
-    return this.prisma.address.findUnique(args);
+    return await this.prisma.address.findUnique(args);
   }
+
   async create<T extends Prisma.AddressCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressCreateArgs>
   ): Promise<Address> {
-    return this.prisma.address.create<T>(args);
+    return this.prisma.address.create(args);
   }
+
   async update<T extends Prisma.AddressUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressUpdateArgs>
   ): Promise<Address> {
-    return this.prisma.address.update<T>(args);
+    return this.prisma.address.update(args);
   }
+
   async delete<T extends Prisma.AddressDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressDeleteArgs>
   ): Promise<Address> {
